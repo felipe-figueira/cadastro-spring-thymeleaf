@@ -1,77 +1,106 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
 
 <meta charset="UTF-8">
 <title>Spring projetoe</title>
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.css"  media="screen,projection"/>
-<link type="text/css" rel="stylesheet" href="/materialize/css/materialize.min.css"  media="screen,projection"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<link type="text/css" rel="stylesheet"
+	href="/materialize/css/materialize.css" media="screen,projection" />
+<link type="text/css" rel="stylesheet"
+	href="/materialize/css/materialize.min.css" media="screen,projection" />
 
 </head>
 <body>
+	<nav>
+	<div class="nav-wrapper cyan darken-3">
+		 <a href="/cadastropessoa" class="brand-logo">SpringBoot</a>
+		 <h6>Cadastro de pessoas</h6>
+	</div>
+	</nav>
+	<br>
 	<div class="container">
 
 		<div class="row">
-		<form class="col s12" action="/salvarpessoa" method="post" th:object="${pessoaobj}">
-			<label>ID</label>
-			<input name="id" th:field="*{id}" readonly="readonly">
-			<div class="input-field col s6">
-			<i class="material-icons prefix">account_circle</i>
-			
-			<input id="first_name" type="text" placeholder="nome" class="validate" name = "nome" th:field="*{nome}">
-			</div>
-			<div class="input-field col s6">
-			
-			<input id="last_name" type="text" placeholder="sobrenome" class="validate" name = "sobrenome" th:field="*{sobrenome}">
-			</div>
-			<div class="input-field col s6">
-			<i class="material-icons prefix">phone</i>
-			<label for="icon_telephone"></label>
-			<input id="icon_telephone" type="tel" placeholder="telefone" class="validate" name = "telefone" th:field="*{telefone}">
-			</div>
-			<div class="input-field col s6">
-			<button class="btn waves-effect waves-light green" type = "submit">Salvar!</button>
-			</div>
-		</form>
+			<form id="formcad" class="col s12" action="/salvarpessoa"
+				method="post" th:object="${pessoaobj}">
+				<div class="input-field col s12">
+					<i class="material-icons prefix">perm_identity</i> <label for="id"
+						class="active">ID</label> <input name="id" th:field="*{id}"
+						readonly="readonly">
+				</div>
+				<div class="input-field col s6">
+					<i class="material-icons prefix">account_circle</i> <label
+						for="first_name" class="active">Nome</label> <input
+						id="first_name" type="text" placeholder="nome" class="validate"
+						name="nome" th:field="*{nome}">
+				</div>
+				<div class="input-field col s6">
+					<label for="last_name" class="active">Sobrenome</label> <input
+						id="last_name" type="text" placeholder="sobrenome"
+						class="validate" name="sobrenome" th:field="*{sobrenome}">
+				</div>
+				<div class="input-field col s12">
+					<i class="material-icons prefix">phone</i> <label
+						for="icon_telephone" class="active">Telefone</label> <input
+						id="icon_telephone" type="tel" placeholder="telefone"
+						class="validate" name="telefone" th:field="*{telefone}">
+				</div>
+
+				<button class="btn waves-effect green" type="submit">Salvar!</button>
+
+
+				<button class="btn waves-effect green" type="submit"
+					onclick="document.getElementById('formcad').reset()">Novo</button>
+
+
+				<a class="btn waves-effect light-blue darken-4 "
+					href="/listapessoas"><i class="material-icons left">cloud</i>listar
+					pessoas</a>
+
+			</form>
 		</div>
-		<br>
-		<br>
-		 <a class="waves-effect waves-light light-blue darken-4 btn-large" href="/listapessoas"><i class="material-icons left">cloud</i>listar pessoas</a>
-		<br>
-		<br>
-		
+
+		<br> <br>
+
 		<div class="row">
-		<form action="pesquisarpessoa" method="post">
-		<div class="input-field col s6">
-		<input name="nomepesquisa" placeholder="Pesquisa por nome:" >
+			<form action="pesquisarpessoa" method="post">
+				<div class="input-field col s10">
+					<i class="material-icons prefix">search</i> <label
+						for="nomepesquisa" class="active">Pesquisar por nome</label> <input
+						name="nomepesquisa" type="text" class="validate"
+						placeholder="Digite o nome">
+				</div>
+				<div class="input-field col s2">
+					<button class="btn waves-effect waves-light green" type="submit">Pesquisar</button>
+				</div>
+			</form>
 		</div>
-		<div class="input-field col s6">
-		<button class="btn waves-effect waves-light green" type = "submit">Pesquisar</button>
-		</div>
-		</form>
-		</div>
-		
+
 		<table class="striped">
-		 <thead>
-          <tr>
-          	  <th>ID</th>
-              <th>Nome</th>
-              <th>Sobrenome</th>
-              <th>Telefone</th>
-          </tr>
-        </thead>
-		<tr th:each = "pessoa :${pessoas}">
-			<td th:text = "${pessoa.id}"></td>
-			<td th:text = "${pessoa.nome}"></td>
-			<td th:text = "${pessoa.sobrenome}"></td>
-			<td th:text = "${pessoa.telefone}"></td>
-			<td><a class="btn waves-effect waves-light" th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a></td>
-			<td><a class="btn waves-effect waves-light red" th:href="@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Excluir</a></td>
-		</tr>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>Sobrenome</th>
+					<th>Telefone</th>
+				</tr>
+			</thead>
+			<tr th:each="pessoa :${pessoas}">
+				<td th:text="${pessoa.id}"></td>
+				<td th:text="${pessoa.nome}"></td>
+				<td th:text="${pessoa.sobrenome}"></td>
+				<td th:text="${pessoa.telefone}"></td>
+				<td><a class="btn waves-effect waves-light orange darken-1"
+					th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a></td>
+				<td><a class="btn waves-effect waves-light red"
+					th:href="@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Excluir</a></td>
+			</tr>
 		</table>
-		
+
 		<script type="text/javascript" src="materialize/js/materialize.js"></script>
 		<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
 	</div>
