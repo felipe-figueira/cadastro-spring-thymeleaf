@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org">
 <head>
 
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Spring projetoe</title>
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -36,9 +36,32 @@
 			</div>
 		</form>
 		</div>
+		<br>
+		<br>
 		 <a class="waves-effect waves-light light-blue darken-4 btn-large" href="/listapessoas"><i class="material-icons left">cloud</i>listar pessoas</a>
+		<br>
+		<br>
+		
+		<div class="row">
+		<form action="pesquisarpessoa" method="post">
+		<div class="input-field col s6">
+		<input name="nomepesquisa" placeholder="Pesquisa por nome:" >
+		</div>
+		<div class="input-field col s6">
+		<button class="btn waves-effect waves-light green" type = "submit">Pesquisar</button>
+		</div>
+		</form>
+		</div>
 		
 		<table class="striped">
+		 <thead>
+          <tr>
+          	  <th>ID</th>
+              <th>Nome</th>
+              <th>Sobrenome</th>
+              <th>Telefone</th>
+          </tr>
+        </thead>
 		<tr th:each = "pessoa :${pessoas}">
 			<td th:text = "${pessoa.id}"></td>
 			<td th:text = "${pessoa.nome}"></td>
