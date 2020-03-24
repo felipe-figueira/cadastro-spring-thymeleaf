@@ -1,11 +1,13 @@
 package com.projeto.spring.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Pessoa implements Serializable{
@@ -18,7 +20,10 @@ public class Pessoa implements Serializable{
 	
 	private String nome;
 	private String sobrenome;
-	private String telefone;
+	private String idade; 
+	
+	@OneToMany(mappedBy = "pessoa")
+	private List<Telefone> telefones;
 	
 	public Long getId() {
 		return id;
@@ -41,11 +46,17 @@ public class Pessoa implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public String getTelefone() {
-		return telefone;
+	public String getIdade() {
+		return idade;
 	}
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setIdade(String idade) {
+		this.idade = idade;
+	}
+	public List<Telefone> getTelefones() {
+		return telefones;
+	}
+	public void setTelefones(List<Telefone> telefones) {
+		this.telefones = telefones;
 	}
 	
 	
