@@ -89,7 +89,7 @@ public class PessoaController {
 		
 		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
 		modelAndView.addObject("pessoaobj", pessoa.get());
-		
+		modelAndView.addObject("telefones", telefoneRepository.getTelefones(idpessoa));
 		return modelAndView;
 	}
 	@PostMapping("**/addfonePessoa/{pessoaid}")
@@ -99,6 +99,7 @@ public class PessoaController {
 		telefoneRepository.save(telefone);
 		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
 		modelAndView.addObject("pessoaobj", pessoa);
+		modelAndView.addObject("telefones", telefoneRepository.getTelefones(pessoaid));
 		return modelAndView;
 	}
 }

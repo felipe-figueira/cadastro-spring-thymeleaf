@@ -56,6 +56,13 @@
 				<button class="btn waves-effect green" type="submit">Salvar!</button>
 				</div>
 		</form>
+		
+		<table class="striped">
+		<tr th:each="fone : ${telefones}">
+		<td th:text="${fone.numero}">
+		<td th:text="${fone.tipo}">
+		
+		</table>
 	</div>
 	</div>
 	<script type="text/javascript" src="materialize/js/materialize.js"></script>
