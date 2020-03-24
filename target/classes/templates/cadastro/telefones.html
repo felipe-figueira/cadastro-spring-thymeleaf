@@ -15,20 +15,50 @@
 </head>
 <body>
 	<nav>
-	<div class="nav-wrapper cyan darken-3">
-		 <a href="/cadastropessoa" class="brand-logo">SpringBoot</a>
-		 <h6>Cadastro de pessoas</h6>
-		 </div>
-	</nav>
-	<div th:each="p : ${pessoaobj}">
-		<div class="row">
-		<p>ID: <span th:text="${p.id}"></span></p>
-		<p>Nome: <span th:text="${p.nome}"></span></p>
-		<p>Sobrenome: <span th:text="${p.sobrenome}"></span></p>
-		<p>Idade: <span th:text="${p.idade}"></span></p>
+		<div class="nav-wrapper cyan darken-3">
+			<a href="/cadastropessoa" class="brand-logo">SpringBoot</a>
+			<h6>Cadastro de pessoas</h6>
 		</div>
+	</nav>
+	<div class="container">
+	<div th:each="p : ${pessoaobj}">
+		<div class="row center">
+			<p>
+				ID: <span th:text="${p.id}"></span>
+			</p>
+			<p>
+				Nome: <span th:text="${p.nome}"></span>
+			</p>
+			<p>
+				Sobrenome: <span th:text="${p.sobrenome}"></span>
+			</p>
+			<p>
+				Idade: <span th:text="${p.idade}"></span>
+			</p>
+		</div>
+
 	</div>
-		<script type="text/javascript" src="materialize/js/materialize.js"></script>
-		<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+	<h5>Telefones</h5>
+	<div class="row">
+		
+		<form th:action="@{/addfonePessoa/{pessoaid}(pessoaid=${pessoaobj.id})}" method="post" >
+			
+				<div class="input-field col s5">
+					<label for="numero" class="active">Número:</label> <input
+						id="numero" name="numero" class="validate">
+					</div>
+						<div class="input-field col s5">
+							<label for="tipo" class="active">Tipo</label> <input id="tipo"
+								name="tipo" class="validate">
+					
+				</div>
+				<div class="input-field col s2">
+				<button class="btn waves-effect green" type="submit">Salvar!</button>
+				</div>
+		</form>
+	</div>
+	</div>
+	<script type="text/javascript" src="materialize/js/materialize.js"></script>
+	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
 </body>
 </html>
